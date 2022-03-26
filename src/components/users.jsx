@@ -22,9 +22,9 @@ const Users = () => {
 	return (
 		<>
 			<h2>{renderPhrase()}</h2>
-			<table className="table">
+			<table className="table table-hover">
 				<thead>
-				<tr>
+				<tr className="table-secondary">
 					<th scope="col" className="d-flex align-items-center">Имя</th>
 					<th scope="col">Личные качества</th>
 					<th scope="col">Профессия</th>
@@ -36,12 +36,12 @@ const Users = () => {
 				<tbody>
 					{users.map((user) => (
 						<tr key={user._id}>
-								<td>{user.name}</td>
-								<td>{user.qualities.map((quality) => <span className={`badge bg-${quality.color} m-2`} key={quality._id}>{quality.name}</span>)}</td>
-								<td>{user.profession.name}</td>
-								<td>{user.completedMeetings}</td>
-								<td>{user.rate}</td>
-								<td><button className='btn btn-danger' onClick={() => hendleDelete(user._id)}>Удалить</button></td>
+								<td className="align-baseline">{user.name}</td>
+								<td className="align-baseline">{user.qualities.map((quality) => <span className={`badge bg-${quality.color} m-2`} key={quality._id}>{quality.name}</span>)}</td>
+								<td className="align-baseline">{user.profession.name}</td>
+								<td className="align-baseline">{user.completedMeetings}</td>
+								<td className="align-baseline">{user.rate}</td>
+								<td className="align-baseline"><button className='btn btn-danger' onClick={() => hendleDelete(user._id)}>Удалить</button></td>
 							</tr>
 						)
 					)}
