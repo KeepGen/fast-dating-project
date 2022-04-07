@@ -4,7 +4,7 @@ const Users = ({users, ...rest}) => {
 	return (
 		<>
 				{users.map((user) => (
-						<User key={user._id} user={user} />
+						<User key={user._id} user={user} {...rest} />
 					)
 
 				)}
