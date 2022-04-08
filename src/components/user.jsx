@@ -4,10 +4,6 @@ import Bookmark from "./bookmark";
 
 const User = (props) => {
 	const {user, onDelete} = props
-	console.log('user', user);
-	console.log('user._id', user._id);
-	console.log('onDelete', onDelete);
-	console.log('= = = = = = = = = = = = = = = = = = = = = = = = = = = = ');
 	return (
 		<>
 			<tr>
@@ -16,6 +12,7 @@ const User = (props) => {
 				<td className="align-baseline">{user.profession.name}</td>
 				<td className="align-baseline">{user.completedMeetings}</td>
 				<td className="align-baseline">{user.rate}</td>
+				<td className="align-baseline"><Bookmark /></td>
 				<td className="align-baseline"><button className='btn btn-danger btn-sm' onClick={() => onDelete(user._id)}>Удалить</button></td>
 			</tr>
 		</>

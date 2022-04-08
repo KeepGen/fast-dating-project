@@ -8,9 +8,7 @@ function App() {
 	const handleDelete = (userId) => {
 		setUsers(users.filter(user => user._id !== userId));
 	};
-	const handleToggleBookmark = (id) => {
-		//
-	}
+
 	return (
 		<>
 			<h2 className="m-2"><SearchStatus length={users.length}/></h2>
@@ -22,11 +20,12 @@ function App() {
 					<th scope="col">Профессия</th>
 					<th scope="col">Количество встреч</th>
 					<th scope="col">Оценка</th>
+					<th scope="col">Избранное</th>
 					<th scope="col">Отказаться</th>
 				</tr>
 				</thead>
 				<tbody>
-					<Users users={users} onDelete={handleDelete} />
+					<Users users={users} onDelete={handleDelete}/>
 				</tbody>
 			</table>
 		</>
