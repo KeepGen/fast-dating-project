@@ -4,10 +4,6 @@ import Bookmark from "./bookmark";
 
 const User = (props) => {
 	const {user, onDelete} = props
-	console.log('user', user);
-	console.log('user._id', user._id);
-	console.log('onDelete', onDelete);
-	console.log('= = = = = = = = = = = = = = = = = = = = = = = = = = = = ');
 	return (
 		<>
 			<tr>
