@@ -1,22 +1,39 @@
 import React from "react";
 import Quality from "./quality";
-import Bookmark from "./bookmark";
-
-const User = (props) => {
-	const {user, onDelete} = props
+import BookMark from "./bookmark";
+const User = ({
+	              _id,
+	              name,
+	              qualities,
+	              profession,
+	              completedMeetings,
+	              rate,
+	              onDelete,
+	              bookmark,
+	              onToggleBookMark,
+              }) => {
 	return (
-		<>
-			<tr>
-				<td className="align-baseline">{user.name}</td>
-				<td className="align-baseline">{user.qualities.map((quality) => <Quality key={quality._id} color={quality.color} name={quality.name} _id={quality._id}/>)}</td>
-				<td className="align-baseline">{user.profession.name}</td>
-				<td className="align-baseline">{user.completedMeetings}</td>
-				<td className="align-baseline">{user.rate}</td>
-				<td className="align-baseline"><Bookmark /></td>
-				<td className="align-baseline"><button className='btn btn-danger btn-sm' onClick={() => onDelete(user._id)}>Удалить</button></td>
-			</tr>
-		</>
-	)
+		<tr>
+			<td className="align-baseline">{name}</td>
+			<td className="align-baseline">
+				{qualities.map((quality) => (
+					<Quality key={quality._id} {...quality} />
+				))}
+			</td>
+			<td className="align-baseline">{profession.name}</td>
+			<td className="align-baseline">{completedMeetings}</td>
+			<td className="align-baseline">{rate} /5</td>
+			<td className="align-baseline">
+				<BookMark status={bookmark} onClick={() => onToggleBookMark(_id)}
+				/>
+			</td>
+			<td className="align-baseline">
+				<button onClick={() => onDelete(_id)} className="btn btn-danger">
+					удалить
+				</button>
+			</td>
+		</tr>
+	);
 };
 
-export default User
+export default User;

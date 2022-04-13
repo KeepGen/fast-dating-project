@@ -1,17 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
 
-const Bookmark = () => {
-	const [status, setStatus] = useState(false);
-	const isFav = <i className={`bi bi-bookmark-star-fill`}></i>
-	const notFav = <i className={`bi bi-bookmark`}></i>
-
-	const toggle = () => {
-		setStatus(!status);
-	}
-
+const BookMark = ({ status, ...rest }) => {
 	return (
-		<button type="button" className="btn btn-outline-info" onClick={toggle}>{(status ? isFav : notFav)}</button>
-	)
+		<button className="btn btn-outline-info" {...rest}>
+			<i className={"bi bi-bookmark" + (status ? "-star-fill" : "")}></i>
+		</button>
+	);
 };
 
-export default Bookmark
+export default BookMark;
