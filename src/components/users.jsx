@@ -28,7 +28,7 @@ const Users = ({ users: allUsers, ...rest }) => {
 
     return (
         <>
-            {professions && <GroupList items={ professions } onItemSelect={handleProfessionSelect} valueProperty="_id" contentProperty="name" />}
+            {professions && <GroupList items={ professions } onItemSelect={handleProfessionSelect} />}
 
             {count > 0 && (
                 <table className="table table-hover">
