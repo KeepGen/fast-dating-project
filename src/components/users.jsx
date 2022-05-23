@@ -6,12 +6,14 @@ import api from "../api";
 import GroupList from "./groupList";
 import SearchStatus from "./searchStatus";
 import UsersTable from "./usersTable";
+import _ from "lodash";
 
 const Users = ({ users: allUsers, ...rest }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfessions] = useState();
     const [selectedProf, setSelectedProf] = useState();
-    const pageSize = 2;
+    const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
+    const pageSize = 8;
 
     useEffect(() => {
         api.professions.fetchAll().then((data) => setProfessions(data));
@@ -29,9 +31,21 @@ const Users = ({ users: allUsers, ...rest }) => {
         setCurrentPage(pageIndex);
     };
 
+    const handleSort = (item) => {
+        if (sortBy.iter === item) {
+            setSortBy((prevState) => ({
+                ...prevState,
+                order: prevState.order === "asc" ? "desc" : "asc"
+            }));
+        } else {
+            setSortBy({ iter: item, order: "asc" });
+        }
+    };
+
     const filteredUsers = selectedProf ? allUsers.filter((user) => JSON.stringify(user.profession) === JSON.stringify(selectedProf)) : allUsers;
     const count = filteredUsers.length;
-    const userCrop = paginate(filteredUsers, currentPage, pageSize);
+    const sortedUsers = _.orderBy(filteredUsers, sortBy.iter, sortBy.order);
+    const userCrop = paginate(sortedUsers, currentPage, pageSize);
 
     const clearFilter = () => {
         setSelectedProf();
@@ -47,7 +61,7 @@ const Users = ({ users: allUsers, ...rest }) => {
             )}
             <div className="d-flex flex-column p-2">
                 <SearchStatus length={count} />
-                {count > 0 && <UsersTable users={userCrop} {...rest}/>}
+                {count > 0 && <UsersTable users={userCrop} onSort={handleSort} {...rest}/>}
                 <div className="d-flex justify-content-center">
                     <Pagination
                         itemsCount={count}
