@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Pagination from "./pagination";
-import User from "./user";
 import { paginate } from "../utils/paginate";
 import api from "../api";
 import GroupList from "./groupList";
 import SearchStatus from "./searchStatus";
+import UsersTable from "./usersTable";
 
 const Users = ({ users: allUsers, ...rest }) => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -47,31 +47,7 @@ const Users = ({ users: allUsers, ...rest }) => {
             )}
             <div className="d-flex flex-column p-2">
                 <SearchStatus length={count} />
-                {count > 0 && (
-                    <table className="table table-hover">
-                        <thead>
-                            <tr className="table-secondary">
-                                <th scope="col">Имя</th>
-                                <th scope="col">Качества</th>
-                                <th scope="col">Провфессия</th>
-                                <th scope="col">Встретился, раз</th>
-                                <th scope="col">Оценка</th>
-                                <th scope="col">Избранное</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {allUsers &&
-                                userCrop.map((user) => (
-                                    <User
-                                        key={user._id}
-                                        {...rest}
-                                        {...user}
-                                    />
-                                ))}
-                        </tbody>
-                    </table>
-                )}
+                {count > 0 && <UsersTable users={userCrop} {...rest}/>}
                 <div className="d-flex justify-content-center">
                     <Pagination
                         itemsCount={count}
