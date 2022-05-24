@@ -1,10 +1,10 @@
 import React from "react";
-// import User from "./user";
 import PropTypes from "prop-types";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
 import Bookmark from "./bookmark";
 import QualitiesList from "./qualitiesList";
+import Table from "./table";
 
 const UsersTable = ({ users, onSort, selectedSort, onToggleBookMark, onDelete, ...rest }) => {
     const columns = {
@@ -35,15 +35,15 @@ const UsersTable = ({ users, onSort, selectedSort, onToggleBookMark, onDelete, .
         }
     };
     return (
-        <table className="table table-hover">
+        <Table
+            onSort={onSort}
+            selectedSort={selectedSort}
+            columns={columns}
+            data={users}
+        >
             <TableHeader { ...{ onSort, selectedSort, columns } } />
             <TableBody { ...{ columns, data: users } } />
-            {/* <tbody> */}
-            {/*    {users.map((user) => ( */}
-            {/*        <User key={user._id} {...rest} {...user} /> */}
-            {/*    ))} */}
-            {/* </tbody> */}
-        </table>
+        </Table>
     );
 };
 
