@@ -6,7 +6,7 @@ import Bookmark from "./bookmark";
 import QualitiesList from "./qualitiesList";
 import Table from "./table";
 
-const UsersTable = ({ users, onSort, selectedSort, onToggleBookMark, onDelete, ...rest }) => {
+const UsersTable = ({ users, onSort, selectedSort, onToggleBookMark, onDelete }) => {
     const columns = {
         name: { path: "name", name: "Имя" },
         qualities: { name: "Качества", component: (user) => (<QualitiesList qualities={user.qualities} />) },

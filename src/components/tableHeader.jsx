@@ -6,11 +6,19 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
         if (selectedSort.path === item) {
             onSort({
                 ...selectedSort,
-                order: selectedSort.order === "asc" ? "desc" : "asc"
+                order: selectedSort.order === "asc"
+                    ? "desc"
+                    : "asc"
             });
         } else {
             onSort({ path: item, order: "asc" });
         }
+    };
+
+    const renderSortIcon = () => {
+        return selectedSort.order === "asc"
+            ? "up-fill"
+            : "down-fill";
     };
 
     return (
@@ -27,16 +35,11 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
                         scope="col"
                     >
                         {columns[column].name}
+                        {selectedSort.path === columns[column].path
+                            ? (<i className={"bi bi-caret-" + renderSortIcon()} />)
+                            : null}
                     </th>
                 ))}
-
-                {/* <th onClick={() => handleSort("name")} scope="col">Имя</th> */}
-                {/* <th scope="col">Качества</th> */}
-                {/* <th onClick={() => handleSort("profession.name")} scope="col">Профессия</th> */}
-                {/* <th onClick={() => handleSort("completedMeetings")} scope="col">Встретился, раз</th> */}
-                {/* <th onClick={() => handleSort("rate")} scope="col">Оценка</th> */}
-                {/* <th onClick={() => handleSort("bookmark")} scope="col">Избранное</th> */}
-                {/* <th scope="col"></th> */}
             </tr>
         </thead>
     );
