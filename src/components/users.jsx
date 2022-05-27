@@ -6,14 +6,20 @@ import api from "../api";
 import GroupList from "./groupList";
 import SearchStatus from "./searchStatus";
 import UsersTable from "./usersTable";
+// import UsersList from "./usersList";
+import UserPage from "./userPage";
+import { useParams } from "react-router-dom";
 import _ from "lodash";
 
 const Users = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfessions] = useState();
     const [selectedProf, setSelectedProf] = useState();
-    const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
+    const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
     const pageSize = 8;
+
+    const params = useParams();
+    const { userId } = params;
 
     const [users, setUsers] = useState();
 
@@ -55,7 +61,6 @@ const Users = () => {
     const handleSort = (item) => {
         setSortBy(item);
     };
-
     if (users) {
         const filteredUsers = selectedProf ? users.filter((user) => JSON.stringify(user.profession) === JSON.stringify(selectedProf)) : users;
         const count = filteredUsers.length;
@@ -76,15 +81,18 @@ const Users = () => {
                 )}
                 <div className="d-flex flex-column p-2">
                     <SearchStatus length={count} />
-                    {count > 0 && (
-                        <UsersTable
-                            users={userCrop}
-                            onSort={handleSort}
-                            selectedSort={sortBy}
-                            onDelete={handleDelete}
-                            onToggleBookMark={handleToggleBookmark}
-                        />
-                    )}
+                    <UserPage users={users} id={userId} />
+                    <>
+                        {count > 0 && (
+                            <UsersTable
+                                users={userCrop}
+                                onSort={handleSort}
+                                selectedSort={sortBy}
+                                onDelete={handleDelete}
+                                onToggleBookMark={handleToggleBookmark}
+                            />
+                        )}
+                    </>
                     <div className="d-flex justify-content-center">
                         <Pagination
                             itemsCount={count}
