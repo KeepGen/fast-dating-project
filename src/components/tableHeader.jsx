@@ -6,9 +6,7 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
         if (selectedSort.path === item) {
             onSort({
                 ...selectedSort,
-                order: selectedSort.order === "asc"
-                    ? "desc"
-                    : "asc"
+                order: selectedSort.order === "asc" ? "desc" : "asc"
             });
         } else {
             onSort({ path: item, order: "asc" });
@@ -16,9 +14,7 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
     };
 
     const renderSortIcon = () => {
-        return selectedSort.order === "asc"
-            ? "up-fill"
-            : "down-fill";
+        return selectedSort.order === "asc" ? "up-fill" : "down-fill";
     };
 
     return (
