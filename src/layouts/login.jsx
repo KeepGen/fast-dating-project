@@ -23,8 +23,8 @@ const Login = () => {
                         </>
                         : <>
                             <h3 className="mb-4">Login Form</h3>
-                            <LoginForm /
-                            ><p>Dont have an account? <a role="button" onClick={toggleFormType}>Sign up</a></p>
+                            <LoginForm />
+                            <p>Dont have an account? <a role="button" onClick={toggleFormType}>Sign up</a></p>
                         </>
                     }
                 </div>
